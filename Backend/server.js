@@ -9,6 +9,14 @@ const port = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(
+  cors({
+    origin: "https://electrify-voting-app-1.onrender.com",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

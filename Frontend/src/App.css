@@ -105,13 +105,18 @@
   }
 }
 
-@media screen and (min-device-width: 350px) and (max-device-width: 800px) {
+@media screen and (min-device-width: 320px) and (max-device-width: 800px) {
   .App {
     height: fit-content;
   }
+
+  .userComponent {
+    height: 100vh;
+  }
+
 }
 
-@media screen and (min-device-width: 320px) and (max-device-width: 500px) {
+@media screen and (min-device-width: 100px) and (max-device-width: 320px) {
   .userComponent {
     height: 100vh;
   }
