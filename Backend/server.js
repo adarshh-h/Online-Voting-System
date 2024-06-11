@@ -9,21 +9,16 @@ const port = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
 
-const allowedOrigins = ["https://electrify-voting-app-z06u.onrender.com"];
+const allowedOrigin = "https://electrify-voting-app-z06u.onrender.com";
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: allowedOrigin,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
 );
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
