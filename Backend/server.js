@@ -7,18 +7,37 @@ const cors = require("cors");
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
-app.use(cors());
 
-const allowedOrigin = "https://electrify-voting-app-z06u.onrender.com";
+
+// Middleware to set CORS headers for every response
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
+const allowedOrigins = [
+  "https://electrify-voting-app-z06u.onrender.com",
+  "https://electrify-voting-app-1.onrender.com",
+];
 
 app.use(
   cors({
-    origin: allowedOrigin,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
+    credentials: true, // Allow cookies
   })
 );
-
 
 // Error handling middleware
 app.use((err, req, res, next) => {
