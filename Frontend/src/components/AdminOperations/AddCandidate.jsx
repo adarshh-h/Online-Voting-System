@@ -62,7 +62,7 @@ const AddCandidate = () => {
           />
         </div>
 
-        <div className="group relative z-0 mb-5 w-full">
+        {/* <div className="group relative z-0 mb-5 w-full">
           <input
             type="text"
             name="image"
@@ -73,7 +73,7 @@ const AddCandidate = () => {
             placeholder="Candidates's Image"
             required
           />
-        </div>
+        </div> */}
 
         <div className="group relative z-0 mb-5 w-full">
           <input

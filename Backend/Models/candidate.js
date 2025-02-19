@@ -16,10 +16,10 @@ const candidateSchema = new mongoose.Schema({
     required: true,
   },
 
-  image: {
-    type: String,
-    require: true,
-  },
+  // image: {
+  //   type: String,
+  //   require: true,
+  // },
 
   votes: [
     {
