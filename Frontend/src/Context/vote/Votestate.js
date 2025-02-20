@@ -130,6 +130,22 @@ const Votestate = (props) => {
     return result;
   };
 
+  // const enrollCandidate = async (formData) => {
+  //   try {
+  //     const response = await fetch("http://localhost:4000/candidate/addcandidate", {
+  //       method: "POST",
+  //       body: formData, // Directly send FormData
+  //     });
+  
+  //     const data = await response.json();
+  //     return data; // Return response
+  //   } catch (error) {
+  //     console.error("Error enrolling candidate:", error);
+  //     return { success: false, message: "Request failed" };
+  //   }
+  // };
+  
+
   // update the candidate
   const editCandidates = async (name, age, party, candidateId) => {
     const updateUrl = `${host}/candidate/update/${candidateId}`;

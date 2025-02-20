@@ -21,8 +21,128 @@ const Signup = () => {
   const [isDropdownOpen, SetisDropdownOpen] = useState(false);
 
   // this method is resposible for signUp
+  // const HandleSignup = async (e) => {
+  //   e.preventDefault();
+  //   const result = await userSignUp(
+  //     details.name,
+  //     details.age,
+  //     details.email,
+  //     details.phone,
+  //     details.address,
+  //     details.aadharnumber,
+  //     details.password,
+  //     details.role
+  //   );
+  //   if (result.success) {
+  //     alert("Signup Done");
+  //     localStorage.setItem("token", result.token);
+  //     navigate("/");
+  //   } else {
+  //     alert("Not Signup done");
+  //   }
+  // };
+  
+  // const HandleSignup = async (e) => {
+  //   e.preventDefault();
+  
+  //   if (parseInt(details.age) < 16) {
+  //     alert("You must be at least 16 years old to sign up.");
+  //     return;
+  //   }
+  
+  //   const result = await userSignUp(
+  //     details.name,
+  //     details.age,
+  //     details.email,
+  //     details.phone,
+  //     details.address,
+  //     details.aadharnumber,
+  //     details.password,
+  //     details.role
+  //   );
+  
+  //   if (result.success) {
+  //     alert("Signup Done");
+  //     localStorage.setItem("token", result.token);
+  //     navigate("/");
+  //   } else {
+  //     alert("Signup failed. Please try again.");
+  //   }
+  // };
+  // const HandleSignup = async (e) => {
+  //   e.preventDefault();
+  
+  //   // Convert age to number
+  //   const age = parseInt(details.age, 10);
+  
+  //   // Validation checks
+  //   if (age < 16) {
+  //     alert("You must be at least 16 years old to sign up.");
+  //     return;
+  //   }
+  
+  //   if (!/^\d{12}$/.test(details.aadharnumber)) {
+  //     alert("Aadhar number must be exactly 12 digits.");
+  //     return;
+  //   }
+  
+  //   if (!/^\d{10}$/.test(details.phone)) {
+  //     alert("Phone number must be exactly 10 digits.");
+  //     return;
+  //   }
+  
+  //   // Proceed with signup
+  //   const result = await userSignUp(
+  //     details.name,
+  //     details.age,
+  //     details.email,
+  //     details.phone,
+  //     details.address,
+  //     details.aadharnumber,
+  //     details.password,
+  //     details.role
+  //   );
+  
+  //   if (result.success) {
+  //     alert("Signup Done");
+  //     localStorage.setItem("token", result.token);
+  //     navigate("/");
+  //   } else {
+  //     alert("Signup failed. Please try again.");
+  //   }
+  // };
+
   const HandleSignup = async (e) => {
     e.preventDefault();
+  
+    // Convert age to number
+    const age = parseInt(details.age, 10);
+  
+    // Email validation regex
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  
+    // Validation checks
+    if (age < 16) {
+      alert("You must be at least 16 years old to sign up.");
+      return;
+    }
+  
+    if (!/^\d{12}$/.test(details.aadharnumber)) {
+      alert("Aadhar number must be exactly 12 digits.");
+      return;
+    }
+  
+    if (!/^\d{10}$/.test(details.phone)) {
+      alert("Phone number must be exactly 10 digits.");
+      return;
+    }
+  
+    if (!emailPattern.test(details.email)) {
+      alert("Invalid email format.");
+      return;
+    }
+  
+    // Proceed with signup
     const result = await userSignUp(
       details.name,
       details.age,
@@ -33,14 +153,17 @@ const Signup = () => {
       details.password,
       details.role
     );
+  
     if (result.success) {
       alert("Signup Done");
       localStorage.setItem("token", result.token);
       navigate("/");
     } else {
-      alert("Not Signup done");
+      alert("Signup failed. Please try again.");
     }
   };
+  
+  
   // this is method for dropdown of role value
   const handleDropdownClick = () => {
     SetisDropdownOpen(!isDropdownOpen);

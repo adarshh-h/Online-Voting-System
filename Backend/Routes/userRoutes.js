@@ -7,20 +7,112 @@ const {
 } = require("../Middleware/JwtAuthentication");
 
 // route for add a user
+// router.post("/signup", async (req, res) => {
+//   try {
+//     let success = false;
+//     let userData = new User(req.body); // here req.body contains data which we enter
+//     let response = await userData.save();
+
+//     // this payload responsible for generating token corresponding to user's id and user's username
+//     const payload = {
+//       id: response.id,
+//     };
+
+//     const token = await generateToken(payload);
+//     success = true;
+//     res.json({ success: success, token: token });
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
+// router.post("/signup", async (req, res) => {
+//   try {
+//     let success = false;
+//     const { age } = req.body;
+
+//     if (!age || age < 16) {
+//       return res.status(400).json({ success, error: "You must be at least 16 years old to sign up." });
+//     }
+
+//     let userData = new User(req.body);
+//     let response = await userData.save();
+
+//     const payload = { id: response.id };
+//     const token = await generateToken(payload);
+    
+//     success = true;
+//     res.json({ success, token });
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
+
+// router.post("/signup", async (req, res) => {
+//   try {
+//     let success = false;
+//     const { age, aadharnumber, phone } = req.body;
+
+//     // Age validation
+//     if (!age || age < 16) {
+//       return res.status(400).json({ success, error: "You must be at least 16 years old to sign up." });
+//     }
+
+//     // Aadhar number validation (must be exactly 12 digits)
+//     if (!/^\d{12}$/.test(aadharnumber)) {
+//       return res.status(400).json({ success, error: "Aadhar number must be exactly 12 digits." });
+//     }
+
+//     // Phone number validation (must be exactly 10 digits)
+//     if (!/^\d{10}$/.test(phone)) {
+//       return res.status(400).json({ success, error: "Phone number must be exactly 10 digits." });
+//     }
+
+//     let userData = new User(req.body);
+//     let response = await userData.save();
+
+//     const payload = { id: response.id };
+//     const token = await generateToken(payload);
+    
+//     success = true;
+//     res.json({ success, token });
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
+
 router.post("/signup", async (req, res) => {
   try {
     let success = false;
-    let userData = new User(req.body); // here req.body contains data which we enter
+    const { age, aadharnumber, phone, email } = req.body;
+
+    // Age validation
+    if (!age || age < 16) {
+      return res.status(400).json({ success, error: "You must be at least 16 years old to sign up." });
+    }
+
+    // Aadhar number validation (must be exactly 12 digits)
+    if (!/^\d{12}$/.test(aadharnumber)) {
+      return res.status(400).json({ success, error: "Aadhar number must be exactly 12 digits." });
+    }
+
+    // Phone number validation (must be exactly 10 digits)
+    if (!/^\d{10}$/.test(phone)) {
+      return res.status(400).json({ success, error: "Phone number must be exactly 10 digits." });
+    }
+
+    // Email validation (must be in correct format)
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      return res.status(400).json({ success, error: "Invalid email format." });
+    }
+
+    let userData = new User(req.body);
     let response = await userData.save();
 
-    // this payload responsible for generating token corresponding to user's id and user's username
-    const payload = {
-      id: response.id,
-    };
-
+    const payload = { id: response.id };
     const token = await generateToken(payload);
+    
     success = true;
-    res.json({ success: success, token: token });
+    res.json({ success, token });
   } catch (error) {
     res.status(500).json(error);
   }

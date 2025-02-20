@@ -49,9 +49,13 @@ const GetAllcandidates = () => {
     SetisModalOpen(false);
   };
 
+  // useEffect(() => {
+  //   getCandidates();
+  // }, []);
   useEffect(() => {
     getCandidates();
-  }, []);
+  }, [getCandidates]);
+  
 
   return (
     <>

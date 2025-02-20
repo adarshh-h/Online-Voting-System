@@ -98,6 +98,34 @@ router.post("/addcandidate", async (req, res) => {
   }
 });
 
+// // Route to add candidate
+// router.post("/addcandidate", upload.single("image"), async (req, res) => {
+//   try {
+//     const { name, age, party } = req.body;
+//     const image = req.file; // Uploaded file
+
+//     if (!name || !age || !party || !image) {
+//       return res.status(400).json({ success: false, message: "All fields are required" });
+//     }
+
+//     // Store the candidate details in the database (MongoDB or other DB)
+//     const newCandidate = {
+//       name,
+//       age,
+//       party,
+//       imageUrl: image.path, // Save file path
+//     };
+
+//     // Mock DB insert (Replace with actual DB call)
+//     console.log("Candidate saved:", newCandidate);
+
+//     res.status(201).json({ success: true, message: "Candidate added successfully" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
+
 // route for update a candidate
 router.put("/update/:candidateId", async (req, res) => {
   try {

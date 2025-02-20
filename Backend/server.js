@@ -53,6 +53,8 @@ const ContactRoutes = require("./Routes/ContactRoutes");
 app.use("/user", userRoutes);
 app.use("/candidate", candidateRoutes);
 app.use("/contact", ContactRoutes);
+app.use("/uploads", express.static("uploads"));
+
 
 app.listen(port, () => {
   console.log(`listening on port number : ${port}`);
